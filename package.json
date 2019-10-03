@@ -21,6 +21,10 @@
     "cmake-js": "^3.1.2"
   },
   "scripts": {
-    "install": "msbuild deps/sphinxbase/sphinxbase.sln /property:Platform=x64 /p:Configuration=Release -t:rebuild & msbuild deps/pocketsphinx/pocketsphinx.sln /property:Platform=x64 /p:Configuration=Release -t:rebuild & cmake-js -G \"Visual Studio 16 2019\" -A x64 compile"
+    "buildsphinxbase": "msbuild deps/sphinxbase/sphinxbase.sln /property:Platform=x64 /p:Configuration=Release -t:rebuild",
+    "buildpocketsphinx": "msbuild deps/pocketsphinx/pocketsphinx.sln /property:Platform=x64 /p:Configuration=Release -t:rebuild",
+    "buildnodepocketsphinx": "cmake-js -G \"Visual Studio 16 2019\" -A x64 compile",
+    "copydlls": "copy \"deps\\sphinxbase\\bin\\Release\\x64\\sphinxbase.dll\" \"build\\release\" && copy \"deps\\pocketsphinx\\bin\\Release\\x64\\pocketsphinx.dll\" \"build\\release\"",
+    "install": "npm run buildsphinxbase && npm run buildpocketsphinx && npm run buildnodepocketsphinx && npm run copydlls"
   }
 }

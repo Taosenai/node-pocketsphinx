@@ -1,5 +1,5 @@
 {
-  "name": "pocketsphinx",
+  "name": "node-pocketsphinx",
   "version": "5.0.7",
   "description": "Node binding for continuous voice recoginition through pocketsphinx.",
   "repository": {
@@ -21,6 +21,6 @@
     "cmake-js": "^3.1.2"
   },
   "scripts": {
-    "install": "cmake-js compile"
+    "install": "msbuild deps/sphinxbase/sphinxbase.sln /property:Platform=x64 /p:Configuration=Release -t:rebuild & msbuild deps/pocketsphinx/pocketsphinx.sln /property:Platform=x64 /p:Configuration=Release -t:rebuild & cmake-js -G \"Visual Studio 16 2019\" -A x64 compile"
   }
 }
